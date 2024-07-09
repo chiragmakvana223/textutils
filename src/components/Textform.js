@@ -4,12 +4,12 @@ export default function Textform(props) {
   const [text, setText] = useState("Enter Text here");
 
   const handleUpClick = () => {
-    // console.log("Uppercase was clicked");
+    
     let newText = text.toUpperCase();
     setText(newText);
   };
   const handleLoClick = () => {
-    // console.log("Uppercase was clicked");
+   
     let newText = text.toLowerCase();
     setText(newText);
   };
@@ -18,13 +18,13 @@ export default function Textform(props) {
     setText(newText);
   };
   const handleOnChange = (event) => {
-    //   console.log("Onchanged");
+   
     setText(event.target.value);
   };
   const handleCopyClick = () => {
-    var text = document.getElementById("mybox");
-    text.select();
-    navigator.clipboard.writeText(text.value);
+    
+    navigator.clipboard.writeText(text);
+    document.getSelection().removeAllRanges();
   };
   const handleExtraSpacesClick = () => {
     let newText= text.split(/[ ]+/);
@@ -46,6 +46,7 @@ export default function Textform(props) {
           ></textarea>
           <button
             type="button"
+            disabled ={text.length === 0}
             onClick={handleUpClick}
             className="btn btn-primary my-3 mx-2"
           >
@@ -53,6 +54,7 @@ export default function Textform(props) {
           </button>
           <button
             type="button"
+            disabled ={text.length === 0}
             onClick={handleLoClick}
             className="btn btn-primary my-3"
           >
@@ -60,6 +62,7 @@ export default function Textform(props) {
           </button>
           <button
             type="button"
+            disabled ={text.length === 0}
             onClick={handleClearClick}
             className="btn btn-primary my-3 mx-2"
           >
@@ -67,6 +70,7 @@ export default function Textform(props) {
           </button>
           <button
             type="button"
+            disabled ={text.length === 0}
             onClick={handleCopyClick}
             className="btn btn-primary my-3 mx-2"
           >
@@ -74,6 +78,7 @@ export default function Textform(props) {
           </button>
           <button
             type="button"
+            disabled ={text.length === 0}
             onClick={handleExtraSpacesClick}
             className="btn btn-primary my-3 mx-2"
           >
@@ -85,7 +90,7 @@ export default function Textform(props) {
       <div className="container my-3">
         <h1>Your Text Summary</h1>
         <p>
-          {text.split(" ").length} words and {text.length} characters.
+          {text.split(/\s+/).filter((element)=>{return element.length !==0}).length} words and {text.length} characters.
         </p>
 
         <h2>Preview</h2>
